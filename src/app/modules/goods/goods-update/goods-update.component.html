@@ -1,0 +1,6 @@
+<app-header [title]="'Goods updating'">
+  <a routerLink="/goods" class="btn btn-primary mr-2">
+    back to list
+  </a>
+</app-header>
+<app-goods-form [goods]="goods$ | async"></app-goods-form>

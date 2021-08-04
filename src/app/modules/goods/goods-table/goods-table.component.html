@@ -1,0 +1,38 @@
+<app-header title="Goods list">
+  <a routerLink="/goods/create" class="btn btn-primary">
+    <bi name="plus" class="icon" ></bi>
+  </a>
+</app-header>
+<table *ngIf="goodsList$ | async as goodsList;else noDataFound" class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Sale</th>
+      <th scope="col">In Stock</th>
+      <th scope="col">
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let goods of goodsList;trackBy: trackByFn">
+      <th scope="row">{{goods.id}}</th>
+      <td>{{goods.title}}</td>
+      <td>{{goods.description}}</td>
+      <td>{{goods.price | number}}$</td>
+      <td>{{goods.sale}}%</td>
+      <td>{{goods.in_stock ? 'Yes' : 'No'}}</td>
+      <td>
+        <a [routerLink]="['/goods/update', goods.id]" class="btn btn-light mr-2">
+          <bi class="icon" name="pencil-square"></bi>
+        </a>
+        <button class="btn btn-light" (click)="onDelete(goods)">
+          <bi class="icon" name="trash-fill"></bi>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #noDataFound>No goods found!</ng-template>
